@@ -2,9 +2,23 @@
 #include <stdlib.h>
 
 /**
- * main - a program that prints "$ "
+ * read_line - a program that prints "$ "
  * Return: 0
  */
+char get_input(void)
+{
+	char line[] = "pwd";
+	char deli[] = " ";
+
+	char *parts = strtok(line, deli);
+
+	while (parts != NULL)
+	{
+		printf("%s\n", parts);
+		parts = strtok(NULL, deli);
+	}
+	return (line);
+}
 
 int main(void)
 {
@@ -15,7 +29,7 @@ int main(void)
 	{
 		printf("$");
 		getline(&buff, &n, stdin);
-		printf("%s\n", buff);
+		printf("%s", buff);
 	}
 	free(buff);
 	return (0);
