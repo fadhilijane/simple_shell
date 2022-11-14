@@ -10,7 +10,7 @@ int main(void)
 	int k = 5;
 	int g = 10;
 	int mul;
-	pid_t pid, ppid;	
+	pid_t pid, ppid;
 
 	pid = getpid();
 	ppid = getppid();
