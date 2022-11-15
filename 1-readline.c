@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "main.h"
 
 /**
  * main - a program that prints simple_shell
@@ -20,7 +16,6 @@
  * You have to handle the “end of file” condition (Ctrl+D)
  * Return: 0
  */
-
 int main(void)
 {
 	size_t n = 10;
@@ -30,9 +25,10 @@ int main(void)
 
 	while (1)
 	{
-		printf("$");
+		putchar(36);
 		getline(&buff, &n, stdin);
 		pid = fork();
+
 		if (pid == -1)
 			return (-1);
 		if (pid == 0)
@@ -46,6 +42,7 @@ int main(void)
 		{
 			wait(NULL);
 		}
+
 	}
 	free(buff);
 	return (0);
