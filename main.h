@@ -17,5 +17,5 @@
 #include <sys/stat.h>
 
 int _putchar(char c);
-
+extern char **environ;
 #endif
