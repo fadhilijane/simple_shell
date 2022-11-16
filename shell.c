@@ -2,50 +2,46 @@
 
 /**
  * main - a program that prints simple_shell
- * Display a prompt and wait for the user to type a command
- * A command line always ends with a new line
- * The prompt is displayed again each time
- * a command has been executed
- * Return: 0
+ * @argc: number of arguments
+ * @argv: aguments
+ * @envp: environment variables
+ * Return: Always (0)
  */
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
-	size_t n = 0;
-	char *buff = NULL;
-	char *argv[2];
-	int k = 0;
-	char *str;
-	pid_t pid;
+	int prompt = 0;
+	int stat = 1;
+	char *line = NULL;
+	char **args = NULL;
+	char **dirs = NULL;
 
-	while (1)
+	(void)argc;
+	(void)argv;
+	dirs = dec_env(envp);
+	prompt = (isatty(STDIN_FILENO));
+
+	while (stat)
 	{
-		_putchar(36);
-		k = getline(&buff, &n, stdin);
-		if (k == -1 || strcmp(buff, "exit\n") == 0)
+		if (prompt == 1)
 		{
-			_putchar('\n');
-			break;
-		}
-		str = strndup(buff, (k - 1));
-		argv[0] = str;
-		argv[1] = NULL;
-		pid = fork();
+			_putchar(36);
 
-		if (pid == 0)
-		{
-			if (execve(argv[0], argv, environ) == -1)
-			{
-				perror("Error");
-				exit(-1);
-			}
 		}
 		else
 		{
-			wait(NULL);
+			stat = 0;
 		}
+		signal(SIGINT, sig_handler);
+		line = read_line();
+		args = _strtkn(line);
+		stat = _exect(args, dirs);
+		if (line)
+			free(line);
+		if (prompt == 0)
+			free(dirs);
+
 	}
-	free(str);
-	free(buff);
+	free(dirs);
 	return (0);
 }
