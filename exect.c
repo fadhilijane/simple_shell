@@ -11,19 +11,28 @@ int _exect(char **args, char **dirs)
 	int k = 0;
 	int check = 1;
 
-	char *argv[] = {"/bin/ls", "-l", NULL};
+	char *bltstr[] = {"cd", "exit", "help", NULL};
 
 	if (args[0] == NULL)
 	{
 		return (1);
 	}
-	for (k = 0; args[k]; k++)
+	for (k = 0 ; bltstr[k]; k++)
 	{
-		if (_strcmp(argv[0], args[0]) == 0)
+		if (_strcmp(bltstr[k], args[0]) == 0)
 		break;
 	}
 	switch (k)
 	{
+		case 0:
+			check = _cd(args);
+			break;
+		case 1:
+			check = _help();
+			break;
+		case 2:
+			check = h_exit();
+			break;
 		default:
 			check = childprcs(args, dirs);
 			break;
