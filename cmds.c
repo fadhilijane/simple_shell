@@ -23,9 +23,9 @@ int cmdrun(char **args, char **pathed)
 
 			if (execve(tstcmd, args, NULL) == -1)
 			{
-				perror("Error");
+				perror("Command not found");
 			}
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
 		}
 		free(tstcmd);
 	}
@@ -36,9 +36,9 @@ int cmdrun(char **args, char **pathed)
 		{
 			if (execve(args[0], args, NULL) == -1)
 			{
-				perror("execve error");
+				perror("Command not found");
 			}
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
 		}
 	}
 	exit(EXIT_SUCCESS);

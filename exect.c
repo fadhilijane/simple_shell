@@ -28,10 +28,10 @@ int _exect(char **args, char **dirs)
 			check = _cd(args);
 			break;
 		case 1:
-			check = _help();
+			check = h_exit();
 			break;
 		case 2:
-			check = h_exit();
+			check = _help();
 			break;
 		default:
 			check = childprcs(args, dirs);

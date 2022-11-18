@@ -15,7 +15,6 @@ int _cd(char **args)
 	if (check != 0)
 	{
 		perror("Error:");
-		free(args);
 	}
 
 	return (1);
